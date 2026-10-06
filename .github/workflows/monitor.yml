@@ -1,0 +1,41 @@
+# Monitor de precios (demo D3): corre el scraper y commitea el CSV si cambió.
+# Sin claves externas: usa el GITHUB_TOKEN estándar con contents: write.
+name: Monitor de precios
+
+on:
+  workflow_dispatch: # botón manual "Run" para probar sin esperar el cron
+  schedule:
+    - cron: "0 7 * * *" # diario ~07:00 UTC (mejor esfuerzo: los cron de GitHub se retrasan)
+
+permissions:
+  contents: write # necesario para el commit automático del CSV
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Correr el scraper (append diario al CSV)
+        run: python scraper.py
+
+      - name: Commit del CSV solo si cambió
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/prices.csv
+          if git diff --cached --quiet; then
+            echo "El CSV no cambió — nada que commitear."
+          else
+            git commit -m "data: serie de precios actualizada (run del monitor)"
+            git push
+          fi
