@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   scrape:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04 # fijo: evita el aviso de migración del label ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v7
