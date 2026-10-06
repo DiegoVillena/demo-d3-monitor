@@ -49,8 +49,10 @@ pytest                                  # tests — NO lanzan peticiones de red
 - Tras una tarea: actualizar la sección **Estado actual** de este archivo.
 
 ## Estado actual
-- **Fase A TERMINADA**: repo público https://github.com/DiegoVillena/demo-d3-monitor
-  (3 commits en `feat/fase-a-ficcion` mergeados a `main` + push). Corrida manual del
-  Actions **en verde** (run #1) y badge "passing". Serie histórica: 2 días, 130 filas.
-  En mesa: pulido local listo (banner de la corrida, bump `checkout@v7`/`setup-python@v7`,
-  fixes del README) — pendiente de confirmación de Diego para el commit.
+- **Fase A TERMINADA y en producción** (sesión 1-2): repo público
+  https://github.com/DiegoVillena/demo-d3-monitor · corridas manuales del Actions en
+  verde sin avisos (run #3: `checkout`/`setup-python` v7, runner `ubuntu-24.04` fijo) ·
+  badge "passing" · serie histórica: 2 días (`2026-10-05`, `2026-10-06`), 130 filas ·
+  cron diario 07:00 UTC; primer commit esperado del bot `github-actions[bot]`:
+  ~07:00 UTC del 2026-10-07 (65 filas del día nuevo).
+- Siguiente sesión natural: **fase B** (Google Sheet / alertas email) — SOLO con ficha nueva.
