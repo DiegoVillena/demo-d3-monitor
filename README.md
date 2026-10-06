@@ -10,6 +10,8 @@
 
 ![Monitor de precios](https://github.com/DiegoVillena/demo-d3-monitor/actions/workflows/monitor.yml/badge.svg)
 
+![Una corrida del Actions en verde](docs/capturas/actions-run-verde.png)
+
 Un scraper que vigila los precios de una categoría de libros, **una vez al día**,
 y va dejando la serie histórica en este mismo repo, en `data/prices.csv`. GitHub
 Actions lo ejecuta todos los días a las ~07:00 UTC (también con botón manual) y
@@ -31,7 +33,7 @@ Monitor de precios (demo D3) — 2026-10-05
 El valor del monitor no está en la corrida de hoy — está en el histórico: cada día
 el Cron añade **65 filas** (una por título y día), y el CSV del repo crece solo.
 Ese archivo es la entrega del servicio S3: la serie con la que el cliente analiza
-tendencias. Al quinto día hay 390 filas; al mes, ~1.950.
+tendencias. Al quinto día hay 325 filas; al mes, ~1.950.
 
 Las primeras filas del CSV (reales, del día 1):
 
@@ -45,7 +47,7 @@ Las primeras filas del CSV (reales, del día 1):
 *Nota honesta: en el sitio de práctica los precios son estáticos, así que la serie
 es plana — pero la mecánica (serie creciendo, idempotencia, commit automático) es
 idéntica a la que correría apuntando a una tienda real, donde los precios sí se
-mueven.*
+mueven. La serie de este repo ya lleva 2 días: 130 filas.*
 
 ## Qué hace esta demo
 
@@ -97,7 +99,8 @@ demo-d3-monitor/
 │   ├── fixtures/fiction-p1.html   ← recorte real de una página del sitio (1 fetch, 1 vez)
 │   └── test_scraper.py            ← parse del fixture + idempotencia del CSV
 ├── data/prices.csv                ← la serie histórica: crece cada día (commiteado)
-└── DOC-USO.md                     ← guía de 1 página: leer el CSV, cambiar de categoría
+├── DOC-USO.md                     ← guía de 1 página: leer el CSV, cambiar de categoría
+└── docs/capturas/                 ← capturas de este README (corrida verde del Actions)
 ```
 
 Lo único que cambia de un cliente a otro vive en las constantes de arriba de
@@ -116,11 +119,13 @@ Lo único que cambia de un cliente a otro vive en las constantes de arriba de
 
 ## Estado
 
-Demo de fase A terminada — el monitor corre cada día a las ~07:00 UTC (y también
-con el botón manual de la pestaña
-[Actions](https://github.com/DiegoVillena/demo-d3-monitor/actions)); el badge de
-arriba muestra el estado de la última ejecución. Alcance congelado según ficha —
-fuera de alcance: Google Sheet en vivo y alertas por email (**fase B, ficha
-aparte**), cualquier otro sitio, dashboards y GUI. Es la tercera demo de
-**Operación Freelancer** (D1 [web de clínica](https://github.com/DiegoVillena/demo-d1-web-clinica),
-D2 [informe automático de ventas](https://github.com/DiegoVillena/demo-d2-informe)).
+Demo de fase A terminada: la corrida manual del Actions está **en verde y sin
+avisos** (la foto de arriba —
+[run #3](https://github.com/DiegoVillena/demo-d3-monitor/actions/runs/37485504665),
+con `checkout`/`setup-python` v7 y runner `ubuntu-24.04` fijo), y el monitor corre cada día a las ~07:00 UTC: el badge de arriba muestra el estado
+de la última ejecución, y el bot `github-actions[bot]` commitea el CSV cada día
+que la serie crece. Alcance congelado según ficha — fuera de alcance: Google Sheet en
+vivo y alertas por email (**fase B, ficha aparte**), cualquier otro sitio,
+dashboards y GUI. Es la tercera demo de **Operación Freelancer** (D1
+[web de clínica](https://github.com/DiegoVillena/demo-d1-web-clinica), D2
+[informe automático de ventas](https://github.com/DiegoVillena/demo-d2-informe)).

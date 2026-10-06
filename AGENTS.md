@@ -49,5 +49,8 @@ pytest                                  # tests — NO lanzan peticiones de red
 - Tras una tarea: actualizar la sección **Estado actual** de este archivo.
 
 ## Estado actual
-- **Fase A en construcción** (sesión 1): scraper + tests + workflow creados;
-  primera corrida local hecha; pendiente: primer push y corrida verde del Actions.
+- **Fase A TERMINADA**: repo público https://github.com/DiegoVillena/demo-d3-monitor
+  (3 commits en `feat/fase-a-ficcion` mergeados a `main` + push). Corrida manual del
+  Actions **en verde** (run #1) y badge "passing". Serie histórica: 2 días, 130 filas.
+  En mesa: pulido local listo (banner de la corrida, bump `checkout@v7`/`setup-python@v7`,
+  fixes del README) — pendiente de confirmación de Diego para el commit.
